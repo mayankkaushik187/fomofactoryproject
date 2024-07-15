@@ -6,6 +6,8 @@ const stockPriceSchema = new mongoose.Schema({
   name: String,
   price: Number,
   image: String,
+  lowestIn24h: Number,
+  highestIn24h: Number,
   timestamp: Date,
 })
 

@@ -45,9 +45,12 @@ const fetchStockData = async () => {
     data.forEach(async (entry: any) => {
       const newPrice = new StockPrice({
         id: entry.id,
+        name: entry.name,
         symbol: entry.symbol,
         price: entry.current_price,
         image: entry.image,
+        highestIn24h: entry.high_24h,
+        lowestIn24h: entry.low_24h,
         timestamp: new Date(),
       })
       await newPrice.save()

@@ -16,18 +16,28 @@ const ChangeCryptoModal: React.FC<ChangeCryptoModalProps> = ({
   }
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <span className="close" onClick={onClose}>
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white p-6 rounded shadow-lg relative">
+        <span
+          className="absolute top-2 right-2 cursor-pointer text-xl"
+          onClick={onClose}
+        >
           &times;
         </span>
-        <h2>Change Crypto</h2>
+        <h2 className="text-xl font-bold mb-4">Change Crypto</h2>
         <input
           type="text"
           value={crypto}
-          onChange={(e) => setCrypto(e.target.value)}
+          onChange={(e) => setCrypto(e.target.value.toLowerCase())}
+          className="border p-2 w-full mb-4"
+          placeholder="Enter Crypto Symbol"
         />
-        <button onClick={handleSubmit}>Change</button>
+        <button
+          onClick={handleSubmit}
+          className="bg-blue-500 text-white py-2 px-4 rounded"
+        >
+          Change
+        </button>
       </div>
     </div>
   )

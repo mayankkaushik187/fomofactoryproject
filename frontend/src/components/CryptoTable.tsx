@@ -24,32 +24,60 @@ const CryptoTable: React.FC<CryptoTableProps> = ({ selectedCrypto }) => {
   }, [dispatch, selectedCrypto])
 
   if (status === 'loading') {
-    return <div>Loading...</div>
+    return <div className="text-center">Loading...</div>
   }
 
   if (status === 'failed') {
-    return <div>Error: {error}</div>
+    return <div className="text-center text-red-500">Error: {error}</div>
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Symbol</th>
-          <th>Price</th>
-          <th>Timestamp</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((entry, index) => (
-          <tr key={index}>
-            <td>{entry.id}</td>
-            <td>{entry.price}</td>
-            <td>{new Date(entry.timestamp).toLocaleString()}</td>
+    <div className="overflow-x-auto">
+      <table className="min-w-full divide-y divide-gray-200">
+        <thead>
+          <tr>
+            <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Image
+            </th>
+            <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Name
+            </th>
+            <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Current Price(USD)
+            </th>
+            <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              24hr Lowest(USD)
+            </th>
+            <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              24hr Highest(USD)
+            </th>
+            <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Timestamp
+            </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody className="bg-white divide-y divide-gray-200">
+          {data.map((entry, index) => (
+            <tr key={index}>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <img src={entry.image} alt={entry.name} className="h-8 w-8" />
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">{entry.name}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{entry.price}</td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {entry.lowestIn24h}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {entry.highestIn24h}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {new Date(entry.timestamp).toLocaleString()}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
