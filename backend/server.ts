@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import { StockPrice } from './models/StockPrice'
 import cryptoRoutes from './routes/crypto'
 import cors from 'cors'
+import { BASE_URI } from './constants/constants'
 dotenv.config()
 
 const app = express()
@@ -31,10 +32,10 @@ const fetchStockData = async () => {
   try {
     const options = {
       method: 'GET',
-      url: 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2Cethereum%2Ctether%2Cbinancecoin%2Csolana',
+      url: BASE_URI,
       headers: {
         accept: 'application/json',
-        'x-cg-demo-api-key': 'CG-SYKpqA4mbTzjucVam2UmiwiB	',
+        'x-cg-demo-api-key': process.env.API_KEY,
       },
     }
     const response = await axios.request(options)
@@ -61,7 +62,7 @@ const fetchStockData = async () => {
 }
 
 // Polling every 10 seconds
-setInterval(fetchStockData, 10000)
+setInterval(fetchStockData, 60000)
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`)

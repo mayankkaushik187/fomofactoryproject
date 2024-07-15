@@ -58,7 +58,10 @@ const CryptoTable: React.FC<CryptoTableProps> = ({ selectedCrypto }) => {
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {data.map((entry, index) => (
-            <tr key={index}>
+            <tr
+              key={index}
+              className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-whit'}`}
+            >
               <td className="px-6 py-4 whitespace-nowrap">
                 <img src={entry.image} alt={entry.name} className="h-8 w-8" />
               </td>
